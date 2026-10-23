@@ -4,10 +4,6 @@
 #include <stdexcept>
 #include <algorithm>
 
-/*3. Write a program that reads the data from raw_temps.txt created in exercise 2 into a vector and then calculates the
-mean and median temperatures in your data set. Call this program temp_stats.cpp.
-*/
-
 struct Reading { // a temperature reading
 	int hour; // hour after midnight [0:23]
 	double temperature; // in Fahrenheit
@@ -20,8 +16,11 @@ struct Parameters {
 
 void getReading(std::istream& ist, std::vector<Reading>& readings) {
 	Reading temp;
+	char waste;
 
-	while (ist >> temp.hour >> temp.temperature) {
+	while (ist >> temp.hour >> temp.temperature >> waste) {
+		if (waste == 'c' or waste == 'C') temp.temperature = (temp.temperature * 9.0 / 5.0) + 32.0;
+		else if (waste != 'f' && waste != 'F')  throw std::runtime_error("Not a correct temperature unit!");
 		readings.push_back(temp);
 	}
 
@@ -42,7 +41,7 @@ Parameters getParameters(const std::vector<Reading>& vec) {
 	
 	sort(sorted.begin(), sorted.end(), compareByTemperature);
 
-	for (Reading temp : sorted) {
+	for (const Reading& temp : sorted) {
 		sum += temp.temperature;
 	}
 
