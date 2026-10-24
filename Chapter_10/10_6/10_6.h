@@ -17,12 +17,12 @@ namespace Roman {
 		const std::string& getRoman() const { return romanChar; }
 		int as_int() const;
 
-	private:
-		std::string romanChar;
-
 		//modifying operations
 		void setRomanChar(const std::string&);
 		void setRomanInt(int);
+
+	private:
+		std::string romanChar;
 
 		//nonmodifying operations
 		std::string generateRomanDigit(int, char, char, char) const;

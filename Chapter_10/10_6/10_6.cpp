@@ -8,8 +8,6 @@
 6. Define a Roman_int class for holding Roman numerals (as ints) with a << and >>. Provide Roman_int with an
 as_int() member that returns the int value, so that if r is a Roman_int, we can write cout << "Roman" << r << "
 equals " << r.as_int() << '\n';.
-
-7. Make a version of the calculator from Chapter 7 that accepts Roman numerals rather than the usual Arabic ones, for example, XXI + CIV == CXXV.
 */
 
 namespace Roman {
@@ -54,9 +52,10 @@ namespace Roman {
 	}
 
 	void Roman_int::setRomanInt(int number) {
-		if (number <= 0 || number > 3999) {
+		if (number > 3999) {
 			throw std::runtime_error("Number out of range (1-3999).");
 		}
+		else if (number <= 0) throw std::runtime_error("Cannot represent <= 0 in Roman notation.");
 
 		std::string result = "";
 
@@ -130,11 +129,12 @@ namespace Roman {
 		case 'C': return 100;
 		case 'D': return 500;
 		case 'M': return 1000;
-		default: return -1;
+		default: throw std::runtime_error("Not a valid Roman notation!");
 		}
 	}
 }
 
+/*
 int main() {
 
 	try {
@@ -150,3 +150,4 @@ int main() {
 
 	return 0;
 }
+*/
