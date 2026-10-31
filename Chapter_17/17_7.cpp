@@ -19,7 +19,7 @@ int main() {
 	int size = SIZE_ARRAY;
 	int counter = 0;
 	
-	for (char temp; std::cin >> temp;) {
+	for (char temp; std::cin.get(temp);) {
 		if (temp == '!')  break;
 
 		if (counter <= size - 1) {
@@ -39,7 +39,7 @@ int main() {
 	}
 	
 	for(int i = 0; i < counter; i++) {
-		std::cout << array[i] << " ";
+		std::cout << array[i];
 	}
 
 	delete[] array;
