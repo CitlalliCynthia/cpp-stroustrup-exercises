@@ -2,7 +2,7 @@
 #include <string>
 
 /*
-11. Complete the “list of gods” example from §17.10.1 and run it.
+11. Complete the â€œlist of godsâ€ example from Â§17.10.1 and run it.
 */
 
 class Link {
@@ -15,7 +15,7 @@ public:
     Link* add(Link* n); // insert n after this object
     Link* erase(); // remove this object from list
     Link* find(const std::string& s); // find s in list
-    const Link* find(const std::string& s) const; // find s in const list (see §18.5.1)
+    const Link* find(const std::string& s) const; // find s in const list (see Â§18.5.1)
     Link* advance(int n) const; // move n positions in list
     Link* next() const { return succ; }
     Link* previous() const { return prev; }
@@ -30,8 +30,8 @@ Link* Link::insert(Link* n) // insert n before this object; return n
     if (this == NULL) return n;
     n->succ = this; // this object comes after n
     if (prev) prev->succ = n;
-    n->prev = prev; // this object’s predecessor becomes n’s predecessor
-    prev = n; // n becomes this object’s predecessor
+    n->prev = prev; // this objectâ€™s predecessor becomes nâ€™s predecessor
+    prev = n; // n becomes this objectâ€™s predecessor
     return n;
 }
 
@@ -41,11 +41,11 @@ Link* Link::add(Link* n) // insert n after this object; return n
     if (this == NULL) return n;
     n->prev = this; // p comes before n
     if (succ) succ->prev = n;
-    n->succ = succ; // p’s successor becomes n’s successor
-    succ = n; // n becomes p’s successor
+    n->succ = succ; // pâ€™s successor becomes nâ€™s successor
+    succ = n; // n becomes pâ€™s successor
     return n;
 }
-Link* Link::erase() // remove *p from list; return p’s successor
+Link* Link::erase() // remove *p from list; return pâ€™s successor
 {
     if (this == NULL) return NULL;
     if (succ) succ->prev = prev;
@@ -53,7 +53,7 @@ Link* Link::erase() // remove *p from list; return p’s successor
     return succ;
 }
 Link* Link::find(const std::string& s) // find s in list;
-// return null for “not found”
+// return null for â€œnot foundâ€
 {
     Link* p = this;
     while (p) {
@@ -63,7 +63,7 @@ Link* Link::find(const std::string& s) // find s in list;
     return NULL;
 }
 Link* Link::advance(int n) const // move n positions in list
-// return null for “not found”
+// return null for â€œnot foundâ€
 // positive n moves forward, negative backward
 {
     Link* p = (Link*)this;
@@ -139,7 +139,7 @@ public:
     }
 
     Link* insert(Link* n);                        // Inserta n antes de este objeto
-    Link* add(Link* n);                           // Inserta n después de este objeto
+    Link* add(Link* n);                           // Inserta n despuÃ©s de este objeto
     Link* erase();                                // Remueve este objeto de la lista
     Link* find(const std::string& s);             // Busca s en la lista
     const Link* find(const std::string& s) const; // Busca s en una lista constante
@@ -158,14 +158,14 @@ Link* Link::insert(Link* n) {
     if (n == nullptr) return this;
     if (this == nullptr) return n;
 
-    n->succ = this;     // 'this' viene después de n
+    n->succ = this;     // 'this' viene despuÃ©s de n
     if (prev) prev->succ = n;
     n->prev = prev;     // El predecesor de 'this' se vuelve el predecesor de n
     prev = n;           // n se vuelve el predecesor de 'this'
     return n;
 }
 
-// 2. ADD (Inserta después del nodo actual)
+// 2. ADD (Inserta despuÃ©s del nodo actual)
 Link* Link::add(Link* n) {
     if (n == nullptr) return this;
     if (this == nullptr) return n;
@@ -198,7 +198,7 @@ Link* Link::find(const std::string& s) {
     return nullptr;
 }
 
-// 5. FIND CONST (Versión constante para objetos de solo lectura)
+// 5. FIND CONST (VersiÃ³n constante para objetos de solo lectura)
 const Link* Link::find(const std::string& s) const {
     const Link* p = this;
     while (p) {
@@ -208,7 +208,7 @@ const Link* Link::find(const std::string& s) const {
     return nullptr;
 }
 
-// 6. ADVANCE (Se mueve n posiciones, soporta números negativos)
+// 6. ADVANCE (Se mueve n posiciones, soporta nÃºmeros negativos)
 Link* Link::advance(int n) const {
     Link* p = const_cast<Link*>(this);
     if (p == nullptr) return nullptr;
@@ -228,7 +228,7 @@ Link* Link::advance(int n) const {
     return p;
 }
 
-// Función auxiliar global para imprimir la lista completa
+// FunciÃ³n auxiliar global para imprimir la lista completa
 void print_all(Link* p) {
     std::cout << "{ ";
     while (p) {
@@ -240,30 +240,30 @@ void print_all(Link* p) {
 }
 
 int main() {
-    // Crear lista de dioses nórdicos
+    // Crear lista de dioses nÃ³rdicos
     Link* norse_gods = new Link{ "Thor" };
     norse_gods = norse_gods->insert(new Link{ "Odin" });
-    norse_gods = norse_gods->insert(new Link{ "Zeus" }); // Zeus se coló aquí erróneamente
+    norse_gods = norse_gods->insert(new Link{ "Zeus" }); // Zeus se colÃ³ aquÃ­ errÃ³neamente
     norse_gods = norse_gods->insert(new Link{ "Freia" });
 
     // Crear lista de deidades griegas
     Link* greek_gods = new Link{ "Hera" };
     greek_gods = greek_gods->insert(new Link{ "Athena" });
-    greek_gods = greek_gods->insert(new Link{ "Mars" }); // Marte está en latín, debe ser Ares
+    greek_gods = greek_gods->insert(new Link{ "Mars" }); // Marte estÃ¡ en latÃ­n, debe ser Ares
     greek_gods = greek_gods->insert(new Link{ "Poseidon" });
 
     // Corregir el nombre de Mars a Ares
     Link* p = greek_gods->find("Mars");
     if (p) p->value = "Ares";
 
-    // Mudar a Zeus de la lista nórdica a la lista griega
+    // Mudar a Zeus de la lista nÃ³rdica a la lista griega
     Link* p2 = norse_gods->find("Zeus");
     if (p2) {
         // Si Zeus resulta ser la cabeza actual del puntero norse_gods, 
         // movemos el inicio de la lista al siguiente antes de sacarlo
         if (p2 == norse_gods) norse_gods = p2->next();
 
-        p2->erase(); // Lo desconectamos de los nórdicos
+        p2->erase(); // Lo desconectamos de los nÃ³rdicos
         greek_gods = greek_gods->insert(p2); // Lo insertamos con los griegos
     }
 
@@ -276,7 +276,7 @@ int main() {
     print_all(greek_gods);
     std::cout << "\n";
 
-    // Limpieza de memoria (Opcional pero buena práctica para evitar memory leaks)
+    // Limpieza de memoria (Opcional pero buena prÃ¡ctica para evitar memory leaks)
     while (norse_gods) {
         Link* next = norse_gods->next();
         delete norse_gods;
