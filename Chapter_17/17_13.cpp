@@ -124,8 +124,30 @@ Link* Link::advance(int n) // move n positions in list
     return p;
 }
 
+Link* Link::add_ordered(Link* n) {
+
+    if (n == NULL) return n;
+
+    Link* p = getBeginning();
+
+    while (p) {
+        if (p->value.name > n->value.name) {
+            p->insert(n);
+            break;
+        }
+        if (p->succ == NULL) {
+            p->add(n);
+            break;
+        }
+        p = p->succ;
+    }
+
+    return n->getBeginning();
+}
+
 Link* Link::getBeginning() {
     Link* p = this;
+    
     while (p->prev) {
         p = p->prev;
     }
@@ -159,8 +181,76 @@ void print_all(Link* p)
     std::cout << " }";
 }
 
+void destroy_list(Link* p) {
+    if (p == NULL) return;
+
+    p = p->getBeginning();
+
+    while (p) {
+        Link* next_node = p->next();
+        delete p;
+        p = next_node;
+    }
+}
+
 int main() {
 
+    Link* mixed_gods = new Link(God("Thor", "Norse", "Chariot", "Mjolnir"));
+    mixed_gods = mixed_gods->insert(new Link(God("Ra", "Egyptian", "Solar Barque", "Sun Disk")));
+    mixed_gods = mixed_gods->insert(new Link(God("Zeus", "Greek", "Pegasus", "Lightning")));
+    mixed_gods = mixed_gods->insert(new Link(God("Odin", "Norse", "Sleipner", "Gungnir")));
+    mixed_gods = mixed_gods->insert(new Link(God("Hera", "Greek", "Chariot", "Peacock")));
+    mixed_gods = mixed_gods->insert(new Link(God("Anubis", "Egyptian", "None", "Staff")));
+
+    std::cout << "--- ORIGINAL MIXED LIST ---\n";
+    print_all(mixed_gods);
+    std::cout << "\n\n";
+
+
+    Link* norse_list = NULL;
+    Link* greek_list = NULL;
+    Link* egyptian_list = NULL;
+
+    Link* current = mixed_gods->getBeginning();
+    while (current) {
+        Link* new_node = new Link(current->value);
+
+        if (current->value.mythology == "Norse") {
+            if (norse_list == NULL) norse_list = new_node;
+            else norse_list = norse_list->add_ordered(new_node);
+        }
+        else if (current->value.mythology == "Greek") {
+            if (greek_list == NULL) greek_list = new_node;
+            else greek_list = greek_list->add_ordered(new_node);
+        }
+        else if (current->value.mythology == "Egyptian") {
+            if (egyptian_list == NULL) egyptian_list = new_node;
+            else egyptian_list = egyptian_list->add_ordered(new_node);
+        }
+
+        current = current->next();
+    }
+
+    std::cout << "--- NORDIC (ORDERED) ---\n";
+    print_all(norse_list);
+    std::cout << "\n\n";
+
+    std::cout << "--- GREEK (ORDERED) ---\n";
+    print_all(greek_list);
+    std::cout << "\n\n";
+
+    std::cout << "--- EGYPTIAN (ORDERED) ---\n";
+    print_all(egyptian_list);
+    std::cout << "\n\n";
+
+    destroy_list(mixed_gods);
+    destroy_list(norse_list);
+    destroy_list(greek_list);
+    destroy_list(egyptian_list);
+
+    return 0;
+
+    /*
     Link* norse_gods = new Link((God("Thor", "Norse", "Chariot", "Mjolnir")));
     norse_gods = norse_gods->insert(new Link(God("Odin", "Norse", "Sleipner", "Gungnir")));
     norse_gods = norse_gods->insert(new Link(God("Zeus", "Greek", "Pegasus", "Lightning")));
@@ -186,4 +276,5 @@ int main() {
     std::cout << "\n";
 
     return 0;
+    */
 }
