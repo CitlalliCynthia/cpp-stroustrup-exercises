@@ -16,16 +16,9 @@ bool isPalindrome(const std::string& s) {
 	return true;
 }
 
-std::istream& read_word(std::istream& ist, char* buffer, int max) {
-	ist.width(max);
-	ist >> buffer;
-	return ist;
-}
-
 int main() {
 
-	const int max = 128;
-	for (char s[max]; read_word(std::cin, s, max);) {
+	for (std::string s; std::cin >> s;) {
 		std::cout << s << " is";
 		if (!isPalindrome(s)) std::cout << " not";
 		std::cout << " a palindrome\n";
