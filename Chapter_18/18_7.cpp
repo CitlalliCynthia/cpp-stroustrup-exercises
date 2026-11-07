@@ -54,16 +54,63 @@ char* cat_dot(const char s1[], const char s2[]) {
 	return dupBeginning;
 }
 
+//EXERCISE 6
+char* cat_dot(const char s1[], const char s2[], const char s3[]) {
+
+	const char* p1 = s1;
+	while (*p1) p1++;
+	int size1 = p1 - s1;
+
+	const char* p2 = s2;
+	while (*p2) p2++;
+	int size2 = p2 - s2;
+
+	const char* p3 = s3;
+	while (*p3) p3++;
+	int size3 = p3 - s3;
+
+	char* duplicated = new char[size1 + size2 + size3 + 1]; //For the end of string
+	char* dupBeginning = duplicated;
+
+	while (*s1) {
+		*duplicated = *s1;
+		duplicated++;
+		s1++;
+	}
+
+	while (*s3) {
+		*duplicated = *s3;
+		duplicated++;
+		s3++;
+	}
+
+	while (*s2) {
+		*duplicated = *s2;
+		duplicated++;
+		s2++;
+	}
+
+	*duplicated = '\0';
+
+	return dupBeginning;
+}
+
 int main() {
 
 	char arr1[] = "Hello";
 	char arr2[] = "World!";
+	char arr3[] = "_._";
 
-	char* p = cat_dot(arr1, arr2);
+	char* p1 = cat_dot(arr1, arr2);
 
-	std::cout << p;
+	std::cout << p1 << "\n";
 
-	delete[] p;
+	char* p2 = cat_dot(arr1, arr2, arr3);
+
+	std::cout << p2 << "\n";
+
+	delete[] p1;
+	delete[] p2;
 
 	return 0;
 }
