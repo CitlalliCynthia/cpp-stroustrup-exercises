@@ -2,9 +2,9 @@
 #include <string>
 
 /*
-8. Rewrite all the functions in Â§18.7 to use the approach of making a backward copy of the string and then 
+8. Rewrite all the functions in §18.7 to use the approach of making a backward copy of the string and then 
 comparing; for example, take "home", generate "emoh", and compare those two strings to see that they are 
-different, so home isnâ€™t a palindrome.
+different, so home isn’t a palindrome.
 */
 
 bool isPalindrome(const char s[], int n) {
