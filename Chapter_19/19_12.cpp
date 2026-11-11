@@ -18,12 +18,14 @@ public:
 		if (!fs) throw std::runtime_error("Can't open input file!\n");
 	}
 
-	std::ifstream& accessFile() {
-		return fs;
-	}
-
 	~File_handle() {
 		fs.close();
+	}
+
+	template <typename T>
+	std::ifstream& operator>>(T& data) {
+		fs >> data;
+		return fs;
 	}
 };
 
@@ -32,7 +34,7 @@ int main() {
 	try {
 		File_handle file("input.txt");
 
-		for (std::string temp; file.accessFile() >> temp;) {
+		for (std::string temp; file >> temp;) {
 			std::cout << temp << " ";
 		}
 	}
