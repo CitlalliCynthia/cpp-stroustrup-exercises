@@ -14,7 +14,7 @@ in a dictionary. Copy the argument into another variable of the same type.
 
 using namespace std;
 
-// 1. Funci髇 para char[] (recibe un puntero const char*)
+// 1. Funci贸n para char[] (recibe un puntero const char*)
 void test_array(const char* s) {
     cout << "--- char[] ---\n";
     cout << "Caracteres: " << strlen(s) << "\n";
@@ -27,7 +27,7 @@ void test_array(const char* s) {
     cout << "Copia: " << copia << "\n\n";
 }
 
-// 2. Funci髇 para vector<char>
+// 2. Funci贸n para vector<char>
 void test_vector(const vector<char>& v) {
     cout << "--- vector<char> ---\n";
     cout << "Caracteres: " << v.size() << "\n";
@@ -42,7 +42,7 @@ void test_vector(const vector<char>& v) {
     cout << "Copia exitosa (tamano " << copia.size() << ")\n\n";
 }
 
-// 3. Funci髇 para list<char>
+// 3. Funci贸n para list<char>
 void test_list(const list<char>& l) {
     cout << "--- list<char> ---\n";
     cout << "Caracteres: " << l.size() << "\n";
@@ -57,7 +57,7 @@ void test_list(const list<char>& l) {
     cout << "Copia exitosa (tamano " << copia.size() << ")\n\n";
 }
 
-// 4. Funci髇 para std::string
+// 4. Funci贸n para std::string
 void test_string(const string& s) {
     cout << "--- std::string ---\n";
     cout << "Caracteres: " << s.size() << "\n";
@@ -70,7 +70,7 @@ void test_string(const string& s) {
 }
 
 int main() {
-    // Definici髇 de las 4 variables con el valor "Hello"
+    // Definici贸n de las 4 variables con el valor "Hello"
     char arr[] = "Hello";
     vector<char> vec = { 'H', 'e', 'l', 'l', 'o' };
     list<char> lst = { 'H', 'e', 'l', 'l', 'o' };
