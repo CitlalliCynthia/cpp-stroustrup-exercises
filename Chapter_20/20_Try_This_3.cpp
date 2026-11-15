@@ -17,14 +17,13 @@ void test_STL(const char* s) {
     
     std::cout << "\nThe char array has " << std::strlen(s) << " elements\n";
 
-    char arr[] = "Hello";
-    
     if (std::strcmp(s, "Hello") == 0) std::cout << "It's equal to 'Hello'\n";
     if (std::strcmp(s, "Howdy") < 0) std::cout << "Hello comes before Howdy in the dictionary\n";
 
-    char copy[10];
-    std::strcpy(copy, s);
+    char* copy = new char[std::strlen(s) + 1];
+    strcpy_s(copy, std::strlen(s) + 1, s);
     std::cout << "Copy: " << copy << "\n";
+    delete[] copy;
 }
 
 void test_STL(const std::vector<char>& s) {
