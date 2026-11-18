@@ -1,0 +1,10 @@
+soup 6
+chair 7
+fruit 1
+spoon 9
+water 3
+pants 4
+candy 2
+table 8
+cup 5
+salt 10
