@@ -1,0 +1,10 @@
+soup 6 45.5
+chair 7 167.4
+fruit 1 21.3
+spoon 9 50.0
+water 3 56.8
+pants 4 100.99
+candy 2 34.6
+table 8 400.0
+cup 5 79.8
+salt 10 10.0
