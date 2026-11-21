@@ -1,0 +1,20 @@
+Gabriel Hayes | Cedar Street 55 | Deliver to security guard
+{ RAM 32GB | 110 2 } { NVMe 2TB | 165 1 } { Thermal Paste | 9.99 1 } 
+Daniel Carter | Forest Avenue 810 | Urgent delivery
+{ Graphics Card | 680 1 } { Power Supply 850W | 140 1 } 
+Natalie Vega | Highland Avenue 1500 | No additional comments
+{ Tablet Pro | 799 1 } { Stylus Pen | 99 1 } { Protective Case | 29.99 1 } 
+Rachel Foster | Liberty Street 22 | No additional comments
+{ Docking Station | 195.5 1 } 
+Isabella Brooks | Moon Street 12 | No additional comments
+{ USB Microphone | 130 1 } { Boom Arm | 45 1 } { Pop Filter | 15 1 } 
+Rosa Ritcher | North Avenue | No additional comments
+{ Chair | 233.99 1 } { Table | 257.55 3 } { Mouse | 67.21 5 } 
+Matthew Brooks | North Boulevard 67 | Ring the blue bell
+{ Mesh Router | 189.99 1 } { Ethernet Cable | 11.5 4 } 
+Sofia Navarro | Palm Avenue 23 | Frequent customer
+{ Wireless Headset | 145 1 } { USB-C Hub | 49.9 2 } { Webcam HD | 89.99 1 } 
+Andrew Miller | Walnut Street 44 | Office hours only
+{ Office Printer | 280 1 } { Ink Cartridge | 42.5 3 } 
+Carlos Mendoza | West Sunset Blvd 104 | Deliver in the afternoon
+{ Mechanical Keyboard | 120.5 1 } { Monitor 27 | 340 2 } 
