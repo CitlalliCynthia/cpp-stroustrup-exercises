@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <numeric>
 #include <list>
 #include <cctype>
 
@@ -18,6 +19,11 @@ write it back out to a file.
 Create another file of at least ten Orders of which about a third are the same
 as in the first file, read it into a write it back out to a file. Merge the two
 files into a third using std::merge().
+*/
+
+/*
+10. Compute the total value of the orders in the two files from the previous 
+exercise. The value of an individual Purchase is (of course) its unit_price*count.
 */
 
 std::string trim(const std::string& s) {
@@ -35,6 +41,14 @@ public:
         : pName(n), unit_price(up), count(c) {}
 
     bool is_empty() const { return pName.empty(); }
+
+    double getPrice() const {
+        return unit_price;
+    }
+
+    int getCount() const {
+        return count;
+    }
 
     friend std::istream& operator>>(std::istream& ist, Purchase& p) {
         char ch;
@@ -97,6 +111,10 @@ public:
         return address;
     }
 
+    const std::vector<Purchase>& getPurchases() const {
+        return purchases;
+    }
+
     friend std::istream& operator>>(std::istream& ist, Order& o) {
         o = Order();
 
@@ -137,7 +155,7 @@ public:
         ost << o.custName << " | " << o.address << " | " << o.data <<
             "\n";
 
-        for (int i = 0; i < o.purchases.size(); i++) {
+        for (size_t i = 0; i < o.purchases.size(); i++) {
             ost << o.purchases[i] << " ";
         }
 
@@ -162,6 +180,21 @@ struct orderByName {
 struct orderByAddress {
     bool operator()(const Order& a, const Order& b) const {
         return a.getAddress() < b.getAddress();
+    }
+};
+
+struct sumPurchases {
+    double operator()(double accum, const Purchase& p) const {
+        return accum + (p.getCount() * p.getPrice());
+    }
+};
+
+struct sumOrders {
+    double operator()(double accum, const Order& o) const {
+        return accum + std::accumulate(o.getPurchases().begin(), 
+                                        o.getPurchases().end(),
+                                        0.0,
+                                        sumPurchases());
     }
 };
 
@@ -226,6 +259,24 @@ int main() {
         }
 
         std::cout << "Merged File successfully created!\n";
+
+        double accumOrdersVec = std::accumulate(vec.begin(),
+                                                vec.end(),
+                                                0.0,
+                                                sumOrders());
+
+        double accumOrdersLst = std::accumulate(lst.begin(),
+                                                lst.end(),
+                                                0.0,
+                                                sumOrders());
+        
+        std::cout << "\nThe total value of the orders (vector) is: " <<
+            accumOrdersVec << "\n";
+        std::cout << "The total value of the orders (list) is: " <<
+            accumOrdersLst << "\n";
+
+        std::cout << "\nThe total value of both files is: " <<
+            accumOrdersLst + accumOrdersVec << "\n";
     }
     catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << "\n";
