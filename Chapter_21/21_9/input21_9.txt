@@ -1,0 +1,20 @@
+Rosa Ritcher | North Avenue | No additional comments
+{ Chair | 233.99 1 } { Table | 257.55 3 } { Mouse | 67.21 5 }
+Vyn Ritcher | North Avenue 2nd | No additional comments
+{ Chair | 233.99 1 } { } { Mouse | 67.21 5 }
+Carlos Mendoza | West Sunset Blvd 104 | Deliver in the afternoon
+{ Mechanical Keyboard | 120.50 1 } { Monitor 27 | 340.00 2 }
+Elena Rostova | Sun Street 88 | Handle with care
+{ Glass Desk | 450.00 1 } { Desk Lamp | 35.99 2 } { Cable Organizer | 12.50 4 }
+Marcus Vance | Central Boulevard 512 | Call upon arrival
+{ Ergonomic Chair | 520.00 1 }
+Sofia Navarro | Palm Avenue 23 | Frequent customer
+{ Wireless Headset | 145.00 1 } { USB-C Hub | 49.90 2 } { Webcam HD | 89.99 1 }
+Liam O'Connor | Oak Street 77 | No additional comments
+{ Standing Desk | 610.00 1 } { Anti-Fatigue Mat | 45.00 1 }
+Valeria Cruz | River Walk 301 | Leave at front desk
+{ Laptop Stand | 39.99 3 } { External SSD 1TB | 115.00 2 }
+Julian Reyes | Pine Street 19 | Cash on delivery
+{ Gaming Mousepad | 24.99 2 } { Wrist Rest | 18.50 2 } { HDMI Cable | 14.00 3 }
+Camila Soto | University Avenue 900 | No additional comments
+{ Dual Monitor Arm | 135.75 1 } { Speakers | 99.99 1 }
