@@ -40,7 +40,7 @@ public:
         char ch;
         if (!(ist >> ch)) return ist;
 
-        if(ch != '{') throw std::runtime_error("Expected '{' for Purchase.");
+        if (ch != '{') throw std::runtime_error("Expected '{' for Purchase.");
 
         std::string content;
         if (!std::getline(ist, content, '}')) {
@@ -96,7 +96,7 @@ public:
     const std::string& getAddress() const {
         return address;
     }
-    
+
     friend std::istream& operator>>(std::istream& ist, Order& o) {
         o = Order();
 
@@ -136,7 +136,7 @@ public:
     friend std::ostream& operator<<(std::ostream& ost, const Order& o) {
         ost << o.custName << " | " << o.address << " | " << o.data <<
             "\n";
-        
+
         for (int i = 0; i < o.purchases.size(); i++) {
             ost << o.purchases[i] << " ";
         }
@@ -177,7 +177,7 @@ int main() {
         }
 
         std::sort(vec.begin(), vec.end(), orderByName());
-        
+
         std::ofstream ost("output21_9.txt");
         if (!ost) throw std::runtime_error("Can't open output file");
 
@@ -207,6 +207,25 @@ int main() {
         }
 
         std::cout << "File (from list) successfully created!\n";
+
+        //sorting again via names, to merge both structures
+        lst.sort(orderByName());
+
+        std::vector<Order> merged;
+
+        std::merge(vec.begin(), vec.end(),
+            lst.begin(), lst.end(),
+            std::back_inserter(merged),
+            orderByName());
+
+        std::ofstream ost3("output21_9_2.txt");
+        if (!ost3) throw std::runtime_error("Can't open output file.");
+
+        for (size_t i = 0; i < merged.size(); i++) {
+            ost3 << merged[i];
+        }
+
+        std::cout << "Merged File successfully created!\n";
     }
     catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << "\n";
