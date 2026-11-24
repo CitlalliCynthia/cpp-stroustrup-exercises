@@ -7,11 +7,17 @@ using namespace std;
 
 /*
 1. Get the email file example to run; test it using a larger file of your own 
-creation. Be sure to include messages that are likely to trigger errors, such as 
+creation. Be sure to include messages that are likely to trigger errors, such as
 messages with two address lines, several messages with the same address and/or 
-same subject, and empty messages. Also test the program with something that simply
-isn’t a message according to that program’s specification, such as a large file 
-containing no –––– lines.
+same subject, and empty messages. Also test the program with something that 
+simply isn’t a message according to that program’s specification, such as a 
+large file containing no –––– lines.
+*/
+
+/*
+2. Add a multimap and have it hold subjects. Let the program take an input 
+string from the keyboard and print out every message with that string as its 
+subject.
 */
 
 typedef vector<string>::const_iterator Line_iter;
@@ -22,7 +28,13 @@ public:
 	Message(Line_iter p1, Line_iter p2) :first{ p1 }, last{ p2 } { }
 	Line_iter begin() const { return first; }
 	Line_iter end() const { return last; }
-	// . . .
+	
+	friend std::ostream& operator<<(std::ostream& ost, const Message& m) {
+		for (Line_iter p = m.first; p != m.last; ++p) {
+			ost << *p << "\n";
+		}
+		return ost;
+	}
 };
 
 using Mess_iter = vector<Message>::const_iterator;
@@ -86,13 +98,32 @@ int main()
 	Mail_file mfile{ "my-mail-file.txt" }; // initialize mfile from a file
 	// first gather messages from each sender together in a multimap:
 	multimap<string, const Message*> sender;
+	multimap<string, const Message*> subject;
 	for (const auto& m : mfile) {
 		string s;
 		if (find_from_addr(&m, s))
 			sender.insert(make_pair(s, &m));
+
+		string sub = find_subject(&m);
+		if (!sub.empty()) {
+			subject.insert(make_pair(sub, &m));
+		}
 	}
+
+	std::string subInput;
+	std::cout << "Input the subject to find: ";
+	std::getline(std::cin, subInput);
+
+	std::cout << "\nMails found with said subject:\n\n";
+	typedef multimap<string, const Message*>::iterator Subject_iter;
+	std::pair<Subject_iter, Subject_iter> it = subject.equal_range(subInput);
+	for (Subject_iter p = it.first; p != it.second; ++p) {
+		std::cout << *(p->second) << "----\n";
+	}
+
 	// now iterate through the multimap
 	// and extract the subjects of John Doe’s messages:
+	std::cout << "\nSubjects of John Doe's messages:\n\n";
 	auto pp = sender.equal_range("John Doe <jdoe@machine.example>");
 	for (auto p = pp.first; p != pp.second; ++p)
 		cout << find_subject(p->second) << '\n';
