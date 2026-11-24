@@ -1,0 +1,35 @@
+From: John Doe <jdoe@machine.example>
+To: Mary Smith <mary@example.net>
+Subject: Saying Hello
+Date: Fri, 21 Nov 2025 09:55:06 -0600
+
+This is a message just to say hello.
+So, "Hello".
+----
+----
+From: John Doe <jdoe@machine.example>
+From: Fake Sender <fake@machine.example>
+Subject: Saying Hello
+Subject: Second Subject Line
+
+Testing a message with TWO "From:" lines and the SAME subject.
+----
+From: Ana Gomez <ana@dev.org>
+Subject: C++ Review
+
+Hi team, please check the pull request.
+----
+From: John Doe <jdoe@machine.example>
+Subject: Meeting Tomorrow
+
+Don't forget our 10 AM sync.
+----
+From: John Doe <jdoe@machine.example>
+To: Support <help@machine.example>
+
+This message from John Doe has NO Subject line at all.
+----
+From: Carlos Ruiz <carlos@test.com>
+
+This message has no separator at the end of the file,
+so the original code will completely ignore it!
