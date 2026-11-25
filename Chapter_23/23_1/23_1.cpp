@@ -26,6 +26,12 @@ subject.
 subject and sender.
 */
 
+/*
+4. Find a real email message file (containing real email messages) and modify 
+the email example to extract subject lines from sender names taken as input from
+the user.
+*/
+
 typedef vector<string>::const_iterator Line_iter;
 class Message { // a Message points to the first and the last lines of a message
 	Line_iter first;
@@ -136,6 +142,13 @@ int main()
 	for (Subject_iter p = it.first; p != it.second; ++p) {
 		std::cout << *(p->second) << "----\n";
 	}
+
+	std::string sendInput;
+	std::cout << "\nInput the sender to find: ";
+	std::getline(std::cin, sendInput);
+	auto sndIt = sender.equal_range(sendInput);
+	for (auto p = sndIt.first; p != sndIt.second; ++p)
+		cout << find_subject(p->second) << '\n';
 
 	// now iterate through the multimap
 	// and extract the subjects of John Doe’s messages:
