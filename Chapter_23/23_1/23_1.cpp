@@ -1,23 +1,29 @@
 #include<string>
 #include<vector>
 #include<map>
+#include <regex>
 #include<fstream>
 #include<iostream>
 using namespace std;
 
 /*
-1. Get the email file example to run; test it using a larger file of your own 
+1. Get the email file example to run; test it using a larger file of your own
 creation. Be sure to include messages that are likely to trigger errors, such as
-messages with two address lines, several messages with the same address and/or 
-same subject, and empty messages. Also test the program with something that 
-simply isn’t a message according to that program’s specification, such as a 
+messages with two address lines, several messages with the same address and/or
+same subject, and empty messages. Also test the program with something that
+simply isn’t a message according to that program’s specification, such as a
 large file containing no –––– lines.
 */
 
 /*
-2. Add a multimap and have it hold subjects. Let the program take an input 
-string from the keyboard and print out every message with that string as its 
+2. Add a multimap and have it hold subjects. Let the program take an input
+string from the keyboard and print out every message with that string as its
 subject.
+*/
+
+/*
+3. Modify the email example from §23.4 to use regular expressions to find the 
+subject and sender.
 */
 
 typedef vector<string>::const_iterator Line_iter;
@@ -28,7 +34,7 @@ public:
 	Message(Line_iter p1, Line_iter p2) :first{ p1 }, last{ p2 } { }
 	Line_iter begin() const { return first; }
 	Line_iter end() const { return last; }
-	
+
 	friend std::ostream& operator<<(std::ostream& ost, const Message& m) {
 		for (Line_iter p = m.first; p != m.last; ++p) {
 			ost << *p << "\n";
@@ -79,17 +85,27 @@ int is_prefix(const string& s, const string& p)
 }
 bool find_from_addr(const Message* m, string& s)
 {
-	for (const auto& x : *m)
-		if (int n = is_prefix(x, "From: ")) {
-			s = string(x, n);
+	static const regex pat{ R"(^From:\s*(.+))" };
+	smatch matches;
+
+	for (const auto& x : *m) {
+		if (regex_match(x, matches, pat)) {
+			s = matches[1];
 			return true;
 		}
+	}
 	return false;
 }
 string find_subject(const Message* m)
 {
-	for (const auto& x : *m)
-		if (int n = is_prefix(x, "Subject: ")) return string(x, n);
+	static const regex pat{ R"(^Subject:\s*(.*))" };
+	smatch matches;
+
+	for (const auto& x : *m) {
+		if (regex_match(x, matches, pat)) {
+			return matches[1];
+		}
+	}
 	return "";
 }
 
